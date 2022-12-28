@@ -156,9 +156,32 @@ function callSendAPI(sender_psid, response) {
     });
 }
 
+let setupProfile = async (req, res) => {
+    let request_body = {
+        "get_started": { "payload": "GET_STARTED" },
+        "whitelisted_domains": ["https://chatboxrestaurant.onrender.com/"]
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    await request({
+        "uri": `https://graph.facebook.com/v15.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('Setup user succeed!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+
+    return res.send("Setup user succeed!")
+}
+
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
-    getWebhook: getWebhook
-
+    getWebhook: getWebhook,
+    setupProfile: setupProfile
 }
