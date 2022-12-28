@@ -1,6 +1,7 @@
 require('dotenv').config();
 import request from "request";
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
