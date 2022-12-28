@@ -159,7 +159,7 @@ function callSendAPI(sender_psid, response) {
 let setupProfile = async (req, res) => {
     let request_body = {
         "get_started": { "payload": "GET_STARTED" },
-        "whitelisted_domains": ["https://chatboxrestaurant.onrender.com/"]
+        "whitelisted_domains": ["https://chatboxmessenger.onrender.com"]
     }
 
     // Send the HTTP request to the Messenger Platform
