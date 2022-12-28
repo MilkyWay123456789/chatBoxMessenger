@@ -1,7 +1,8 @@
 require('dotenv').config();
 import request from "request";
 
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const IMAGE_GET_STARTED = 'https://bit.ly/3YSwBKR'
 let callSendApi = (sender_psid, response) => {
     // Construct the message body
     let request_body = {
@@ -50,13 +51,51 @@ let handleWithStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let username = await getUserName(sender_psid);
-            let response = { "text": `Xin chào bạn ${username} đến với MilkyWay` }
-            await callSendApi(sender_psid, response);
+            let responseName = { "text": `Xin chào bạn ${username} đến với MilkyWay` }
+            let responseTem = sendGetStartedTemplate();
+            //send text message
+            await callSendApi(sender_psid, responseName);
+            //send generic message template
+            await callSendApi(sender_psid, responseTem);
             resolve("done")
         } catch (e) {
             reject(e)
         }
     })
+}
+
+let sendGetStartedTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Welcome to bookstore Milkyway",
+                    "subtitle": "Choose the option",
+                    "image_url": IMAGE_GET_STARTED,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "LIST BOOK",
+                            "payload": "MAIN_BOOK",
+                        },
+                        {
+                            "type": "postback",
+                            "title": "ORDER BOOK",
+                            "payload": "ORDER_BOOK",
+                        },
+                        {
+                            "type": "postback",
+                            "title": "GUIDE",
+                            "payload": "GUIDE_TO_USE",
+                        }
+                    ],
+                }]
+            }
+        }
+    }
+    return response;
 }
 
 module.exports = {
