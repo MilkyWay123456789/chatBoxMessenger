@@ -32,7 +32,7 @@ let getUserName = (sender_psid) => {
         request({
             "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
             "qs": { "access_token": PAGE_ACCESS_TOKEN },
-            "method": "POST",
+            "method": "GET",
         }, (err, res, body) => {
             if (!err) {
                 body = JSON.parse(res)
