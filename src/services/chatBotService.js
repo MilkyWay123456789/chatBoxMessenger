@@ -9,21 +9,25 @@ const IMAGE_CHANGE_BOOK = 'https://bit.ly/3jI0nla';
 const IMAGE_ISEKAI = 'https://bit.ly/3C6cBKL';
 const IMAGE_FANTASY = 'https://bit.ly/3G1CvAQ';
 const IMAGE_SLICE = 'https://bit.ly/3Z0BSjm';
+
 const IMAGE_DORAEMON = 'https://bit.ly/3Q1nQKh';
 const IMAGE_FAIRYTAIL = 'https://bit.ly/3voxi0P';
 const IMAGE_ONEPIECE = 'https://bit.ly/3VwPHn0';
 const IMAGE_BACK = 'https://bit.ly/3Z1aNg0';
+
 const IMAGE_COTE = 'https://bit.ly/3IcgBNW';
 const IMAGE_5CMS = 'https://bit.ly/3jFf4FE';
 const IMAGE_YOURNAME = 'https://bit.ly/3WOzlYp';
+
 const IMAGE_BERSERK = 'https://bit.ly/3Q4xmfC';
 const IMAGE_GRIMGAS = 'https://bit.ly/3G29sgw';
 const IMAGE_KONOSYBA = 'https://bit.ly/3YZaGS5';
+
 const IMAGE_HORIMIYA = 'https://bit.ly/3FYdDK6';
 const IMAGE_HIGENOWORU = 'https://bit.ly/3YZcACd';
 const IMAGE_ANGELNEXTDOOR = 'https://bit.ly/3GsdZdg';
 
-let callSendApi = (sender_psid, response) => {
+let callSendApi = async (sender_psid, response) => {
     // Construct the message body
     let request_body = {
         "recipient": {
@@ -31,6 +35,9 @@ let callSendApi = (sender_psid, response) => {
         },
         "message": response
     }
+
+    await sendMarkReadMessage(sender_psid);
+    await sendTypingOn(sender_psid);
 
     // Send the HTTP request to the Messenger Platform
     request({
@@ -43,6 +50,54 @@ let callSendApi = (sender_psid, response) => {
             console.log('message sent!')
         } else {
             console.error("Unable to send message:" + err);
+        }
+    });
+}
+
+let sendTypingOn = (sender_psid) => {
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "sender_action": "typing_on"
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v2.6/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('sendTypingOn sent!')
+        } else {
+            console.error("Unable to send sendTypingOn:" + err);
+        }
+    });
+}
+
+let sendMarkReadMessage = (sender_psid) => {
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "sender_action": "mark_seen"
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v2.6/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('sendTypingOn sent!')
+        } else {
+            console.error("Unable to send sendTypingOn:" + err);
         }
     });
 }
