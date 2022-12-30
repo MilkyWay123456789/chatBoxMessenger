@@ -12,7 +12,11 @@ const IMAGE_SLICE = 'https://bit.ly/3Z0BSjm';
 const IMAGE_DORAEMON = 'https://bit.ly/3Q1nQKh';
 const IMAGE_FAIRYTAIL = 'https://bit.ly/3voxi0P';
 const IMAGE_ONEPIECE = 'https://bit.ly/3VwPHn0';
-const IMAGE_BACK = 'https://bit.ly/3Z1aNg0'
+const IMAGE_BACK = 'https://bit.ly/3Z1aNg0';
+const IMAGE_COTE = 'https://bit.ly/3IcgBNW';
+const IMAGE_5CMS = 'https://bit.ly/3jFf4FE';
+const IMAGE_YOURNAME = 'https://bit.ly/3jFf4FE';
+
 let callSendApi = (sender_psid, response) => {
     // Construct the message body
     let request_body = {
@@ -307,6 +311,18 @@ let sendMangaTemplate = () => {
                             },
                         ],
                     },
+                    {
+                        "title": "Go back",
+                        "subtitle": "Go back to list book",
+                        "image_url": IMAGE_BACK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "GO BACK",
+                                "payload": "BACK_TO_LIST_BOOK",
+                            },
+                        ],
+                    },
                 ]
             }
         }
@@ -314,9 +330,92 @@ let sendMangaTemplate = () => {
     return response;
 }
 
+let handleDetailNovel = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let responseTem = getDetailNovelTemplate();
+            //send generic message template
+            await callSendApi(sender_psid, responseTem);
+            resolve("done")
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+let getDetailNovelTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "Classroomm of elite",
+                        "subtitle": "100.000 VND",
+                        "image_url": IMAGE_COTE,
+                    },
+                    {
+                        "title": "5CM/S",
+                        "subtitle": "120.000 VND",
+                        "image_url": IMAGE_5CMS,
+                    },
+                    {
+                        "title": "Your Name",
+                        "subtitle": "200.000 VND",
+                        "image_url": IMAGE_YOURNAME,
+                    },
+                    {
+                        "title": "Go back",
+                        "subtitle": "Go back to list book",
+                        "image_url": IMAGE_BACK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "GO BACK",
+                                "payload": "BACK_TO_LIST_BOOK",
+                            },
+                        ],
+                    },
+                ]
+            }
+        }
+    }
+    return response;
+}
+
+let handleDetailFantasy = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let responseTem = getDetailNovelTemplate();
+            //send generic message template
+            await callSendApi(sender_psid, responseTem);
+            resolve("done")
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+let handleDetailSlice = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let responseTem = getDetailNovelTemplate();
+            //send generic message template
+            await callSendApi(sender_psid, responseTem);
+            resolve("done")
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
 module.exports = {
     handleWithStarted: handleWithStarted,
     handleSendListBook: handleSendListBook,
     handleSendNovel: handleSendNovel,
-    handleSendManga: handleSendManga
+    handleSendManga: handleSendManga,
+    handleDetailNovel: handleDetailNovel,
+    handleDetailFantasy: handleDetailFantasy,
+    handleDetailSlice: handleDetailSlice,
 }
