@@ -98,6 +98,79 @@ let sendGetStartedTemplate = () => {
     return response;
 }
 
+let handleSendListBook = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let responseTem = sendListBookTemplate();
+            //send generic message template
+            await callSendApi(sender_psid, responseTem);
+            resolve("done")
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+let sendListBookTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "List Book Milkyway",
+                        "subtitle": "We are please to offer you a list book",
+                        "image_url": IMAGE_GET_STARTED,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "NOVEL",
+                                "payload": "NOVEL",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "MANGA",
+                                "payload": "MANGA",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "GUIDE",
+                                "payload": "GUIDE_TO_USE",
+                            }
+                        ],
+                    },
+                    {
+                        "title": "Open Hour",
+                        "subtitle": "MON-FRI 8AM-9AM | SAR 9AM-10AM | SUN 10AM-11AM",
+                        "image_url": IMAGE_GET_STARTED,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "ORDER BOOK",
+                                "payload": "ORDER_BOOK",
+                            },
+                        ],
+                    },
+                    {
+                        "title": "Change book",
+                        "subtitle": "We are willing to accept book exchanges",
+                        "image_url": IMAGE_GET_STARTED,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "CHANGE BOOK",
+                                "payload": "CHANGE_BOOK",
+                            },
+                        ],
+                    },
+                ]
+            }
+        }
+    }
+}
+
 module.exports = {
-    handleWithStarted: handleWithStarted
+    handleWithStarted: handleWithStarted,
+    handleSendListBook: handleSendListBook
 }

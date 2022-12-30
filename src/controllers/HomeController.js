@@ -135,6 +135,9 @@ async function handlePostback(sender_psid, received_postback) {
         case 'GET_STARTED':
             await chatBotService.handleWithStarted(sender_psid)
             break;
+        case 'LIST BOOK':
+            await chatBotService.handleSendListBook(sender_psid)
+            break;
         default:
             response = { "text": `Oops, i dont know response with postback ${payload}` }
     }
