@@ -5,7 +5,10 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const IMAGE_GET_STARTED = 'https://bit.ly/3YSwBKR';
 const IMAGE_LIST_BOOK = 'https://bit.ly/3I7lVlH';
 const IMAGE_OPEN = 'https://bit.ly/3vnqAs7';
-const IMAGE_CHANGE_BOOK = 'https://bit.ly/3i0JJgl';
+const IMAGE_CHANGE_BOOK = 'https://bit.ly/3jI0nla';
+const IMAGE_ISEKAI = 'https://bit.ly/3C6cBKL';
+const IMAGE_FANTASY = 'https://bit.ly/3G1CvAQ';
+const IMAGE_SLICE = 'https://bit.ly/3Z0BSjm';
 let callSendApi = (sender_psid, response) => {
     // Construct the message body
     let request_body = {
@@ -192,7 +195,7 @@ let sendNovelTemplate = () => {
                     {
                         "title": "Isekai",
                         "subtitle": "We have isekai hot novel",
-                        "image_url": IMAGE_LIST_BOOK,
+                        "image_url": IMAGE_ISEKAI,
                         "buttons": [
                             {
                                 "type": "postback",
@@ -204,7 +207,7 @@ let sendNovelTemplate = () => {
                     {
                         "title": "Fantasy",
                         "subtitle": "We have fantasy novel",
-                        "image_url": IMAGE_OPEN,
+                        "image_url": IMAGE_FANTASY,
                         "buttons": [
                             {
                                 "type": "postback",
@@ -216,7 +219,7 @@ let sendNovelTemplate = () => {
                     {
                         "title": "Slice of Slice",
                         "subtitle": "We have a lot of slice of slice novel",
-                        "image_url": IMAGE_CHANGE_BOOK,
+                        "image_url": IMAGE_SLICE,
                         "buttons": [
                             {
                                 "type": "postback",
