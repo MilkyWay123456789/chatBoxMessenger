@@ -138,6 +138,15 @@ async function handlePostback(sender_psid, received_postback) {
         case 'MAIN_BOOK':
             await chatBotService.handleSendListBook(sender_psid)
             break;
+        case 'NOVEL':
+            await chatBotService.handleSendNovel(sender_psid)
+            break;
+        case 'MANGA':
+            await chatBotService.handleSendManga(sender_psid)
+            break;
+        case 'VIEW_NOVEL':
+        case 'VIEW_FANTASY':
+        case 'VIEW_SLICEOFSLICE':
         default:
             response = { "text": `Oops, i dont know response with postback ${payload}` }
     }

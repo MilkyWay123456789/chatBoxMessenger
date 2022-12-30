@@ -136,11 +136,137 @@ let sendListBookTemplate = () => {
                                 "title": "MANGA",
                                 "payload": "MANGA",
                             },
+                        ],
+                    },
+                    {
+                        "title": "Open Hour",
+                        "subtitle": "MON-FRI 8AM-9AM | SAR 9AM-10AM | SUN 10AM-11AM",
+                        "image_url": IMAGE_OPEN,
+                        "buttons": [
                             {
                                 "type": "postback",
-                                "title": "BOOK",
-                                "payload": "BOOK",
-                            }
+                                "title": "ORDER BOOK",
+                                "payload": "ORDER_BOOK",
+                            },
+                        ],
+                    },
+                    {
+                        "title": "Change book",
+                        "subtitle": "We are willing to accept book exchanges",
+                        "image_url": IMAGE_CHANGE_BOOK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "CHANGE BOOK",
+                                "payload": "CHANGE_BOOK",
+                            },
+                        ],
+                    },
+                ]
+            }
+        }
+    }
+    return response;
+}
+
+let handleSendNovel = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let responseTem = sendNovelTemplate();
+            //send generic message template
+            await callSendApi(sender_psid, responseTem);
+            resolve("done")
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+let sendNovelTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "Isekai",
+                        "subtitle": "We have isekai hot novel",
+                        "image_url": IMAGE_LIST_BOOK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "VIEW DETAILS",
+                                "payload": "VIEW_NOVEL",
+                            },
+                        ],
+                    },
+                    {
+                        "title": "Fantasy",
+                        "subtitle": "We have fantasy novel",
+                        "image_url": IMAGE_OPEN,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "VIEW DETAILS",
+                                "payload": "VIEW_FANTASY",
+                            },
+                        ],
+                    },
+                    {
+                        "title": "Slice of Slice",
+                        "subtitle": "We have a lot of slice of slice novel",
+                        "image_url": IMAGE_CHANGE_BOOK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "VIEW DETAILS",
+                                "payload": "VIEW_SLICEOFSLICE",
+                            },
+                        ],
+                    },
+                ]
+            }
+        }
+    }
+    return response;
+}
+
+let handleSendManga = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let responseTem = sendMangaTemplate();
+            //send generic message template
+            await callSendApi(sender_psid, responseTem);
+            resolve("done")
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+let sendMangaTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "List Book Milkyway",
+                        "subtitle": "We are please to offer you a list book",
+                        "image_url": IMAGE_LIST_BOOK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "NOVEL",
+                                "payload": "NOVEL",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "MANGA",
+                                "payload": "MANGA",
+                            },
                         ],
                     },
                     {
@@ -176,5 +302,7 @@ let sendListBookTemplate = () => {
 
 module.exports = {
     handleWithStarted: handleWithStarted,
-    handleSendListBook: handleSendListBook
+    handleSendListBook: handleSendListBook,
+    handleSendNovel: handleSendNovel,
+    handleSendManga: handleSendManga
 }
