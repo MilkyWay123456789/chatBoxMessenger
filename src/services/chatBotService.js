@@ -27,6 +27,8 @@ const IMAGE_HORIMIYA = 'https://bit.ly/3FYdDK6';
 const IMAGE_HIGENOWORU = 'https://bit.ly/3YZcACd';
 const IMAGE_ANGELNEXTDOOR = 'https://bit.ly/3GsdZdg';
 
+const IMAGE_CHANGE_DETAIL_BOOK = 'https://bit.ly/3CbMa6N';
+
 let callSendApi = async (sender_psid, response) => {
     // Construct the message body
     let request_body = {
@@ -553,6 +555,60 @@ let getDetailSliceTemplate = () => {
     return response;
 }
 
+let getImageChangBookTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "image",
+            "payload": {
+                "url": IMAGE_CHANGE_DETAIL_BOOK,
+                "is_reusable": true
+            }
+        }
+    }
+    return response;
+}
+
+let getButtonTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "button",
+                "text": "The book in bookstore is cheap",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "LIST BOOK",
+                        "payload": "MAIN_BOOK",
+                    },
+                    {
+                        "type": "postback",
+                        "title": "ORDER BOOK",
+                        "payload": "ORDER_BOOK",
+                    },
+                ]
+            }
+        }
+    }
+    return response;
+}
+
+let handleChangeBook = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            //send an image
+            let responseTem = getImageChangBookTemplate();
+            //send button
+            let responseButton = getButtonTemplate();
+            await callSendApi(sender_psid, responseTem);
+            await callSendApi(sender_psid, responseButton);
+            resolve("done")
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
 module.exports = {
     handleWithStarted: handleWithStarted,
     handleSendListBook: handleSendListBook,
@@ -561,4 +617,5 @@ module.exports = {
     handleDetailNovel: handleDetailNovel,
     handleDetailFantasy: handleDetailFantasy,
     handleDetailSlice: handleDetailSlice,
+    handleChangeBook: handleChangeBook,
 }

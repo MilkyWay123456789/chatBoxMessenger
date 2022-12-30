@@ -163,6 +163,9 @@ async function handlePostback(sender_psid, received_postback) {
         case 'VIEW_ONEPIECE':
             await chatBotService.handleDetailOnePiece(sender_psid)
             break;
+        case 'CHANGE_BOOK':
+            await chatBotService.handleChangeBook(sender_psid)
+            break;
         default:
             response = { "text": `Oops, i dont know response with postback ${payload}` }
     }
