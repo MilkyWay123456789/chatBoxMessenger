@@ -136,6 +136,7 @@ async function handlePostback(sender_psid, received_postback) {
             await chatBotService.handleWithStarted(sender_psid)
             break;
         case 'MAIN_BOOK':
+        case 'BACK_TO_LIST_BOOK':
             await chatBotService.handleSendListBook(sender_psid)
             break;
         case 'NOVEL':

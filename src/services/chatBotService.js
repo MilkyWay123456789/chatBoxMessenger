@@ -12,6 +12,7 @@ const IMAGE_SLICE = 'https://bit.ly/3Z0BSjm';
 const IMAGE_DORAEMON = 'https://bit.ly/3Q1nQKh';
 const IMAGE_FAIRYTAIL = 'https://bit.ly/3voxi0P';
 const IMAGE_ONEPIECE = 'https://bit.ly/3VwPHn0';
+const IMAGE_BACK = 'https://bit.ly/3Z1aNg0'
 let callSendApi = (sender_psid, response) => {
     // Construct the message body
     let request_body = {
@@ -228,6 +229,18 @@ let sendNovelTemplate = () => {
                                 "type": "postback",
                                 "title": "VIEW DETAILS",
                                 "payload": "VIEW_SLICEOFSLICE",
+                            },
+                        ],
+                    },
+                    {
+                        "title": "Go back",
+                        "subtitle": "Go back to list book",
+                        "image_url": IMAGE_BACK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "GO BACK",
+                                "payload": "BACK_TO_LIST_BOOK",
                             },
                         ],
                     },
