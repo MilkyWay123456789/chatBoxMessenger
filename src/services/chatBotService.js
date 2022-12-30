@@ -135,8 +135,8 @@ let sendListBookTemplate = () => {
                             },
                             {
                                 "type": "postback",
-                                "title": "GUIDE",
-                                "payload": "GUIDE_TO_USE",
+                                "title": "BOOK",
+                                "payload": "BOOK",
                             }
                         ],
                     },
