@@ -18,7 +18,10 @@ const IMAGE_5CMS = 'https://bit.ly/3jFf4FE';
 const IMAGE_YOURNAME = 'https://bit.ly/3WOzlYp';
 const IMAGE_BERSERK = 'https://bit.ly/3Q4xmfC';
 const IMAGE_GRIMGAS = 'https://bit.ly/3G29sgw';
-const IMAGE_KONOSYBA = 'https://bit.ly/3YZaGS5'
+const IMAGE_KONOSYBA = 'https://bit.ly/3YZaGS5';
+const IMAGE_HORIMIYA = 'https://bit.ly/3FYdDK6';
+const IMAGE_HIGENOWORU = 'https://bit.ly/3YZcACd';
+const IMAGE_ANGELNEXTDOOR = 'https://bit.ly/3GsdZdg';
 
 let callSendApi = (sender_psid, response) => {
     // Construct the message body
@@ -387,6 +390,19 @@ let getDetailNovelTemplate = () => {
     return response;
 }
 
+let handleDetailFantasy = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let responseTem = getDetailFantasyTemplate();
+            //send generic message template
+            await callSendApi(sender_psid, responseTem);
+            resolve("done")
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
 let getDetailFantasyTemplate = () => {
     let response = {
         "attachment": {
@@ -428,10 +444,10 @@ let getDetailFantasyTemplate = () => {
     return response;
 }
 
-let handleDetailFantasy = (sender_psid) => {
+let handleDetailSlice = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = getDetailFantasyTemplate();
+            let responseTem = getDetailSliceTemplate();
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -441,17 +457,45 @@ let handleDetailFantasy = (sender_psid) => {
     })
 }
 
-let handleDetailSlice = (sender_psid) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let responseTem = getDetailNovelTemplate();
-            //send generic message template
-            await callSendApi(sender_psid, responseTem);
-            resolve("done")
-        } catch (e) {
-            reject(e)
+let getDetailSliceTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "Horimiya",
+                        "subtitle": "80.000 VND",
+                        "image_url": IMAGE_HORIMIYA,
+                    },
+                    {
+                        "title": "Hige no woru",
+                        "subtitle": "110.000 VND",
+                        "image_url": IMAGE_HIGENOWORU,
+                    },
+                    {
+                        "title": "Angel next door",
+                        "subtitle": "130.000 VND",
+                        "image_url": IMAGE_ANGELNEXTDOOR,
+                    },
+                    {
+                        "title": "Go back",
+                        "subtitle": "Go back to list book",
+                        "image_url": IMAGE_BACK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "GO BACK",
+                                "payload": "BACK_TO_LIST_BOOK",
+                            },
+                        ],
+                    },
+                ]
+            }
         }
-    })
+    }
+    return response;
 }
 
 module.exports = {
