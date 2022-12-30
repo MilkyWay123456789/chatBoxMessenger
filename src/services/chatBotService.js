@@ -168,6 +168,7 @@ let sendListBookTemplate = () => {
             }
         }
     }
+    return response;
 }
 
 module.exports = {
