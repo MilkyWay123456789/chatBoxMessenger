@@ -147,6 +147,9 @@ async function handlePostback(sender_psid, received_postback) {
         case 'VIEW_NOVEL':
         case 'VIEW_FANTASY':
         case 'VIEW_SLICEOFSLICE':
+        case 'VIEW_DORAEMON':
+        case 'VIEW_FAIRYTAIL':
+        case 'VIEW_ONEPIECE':
         default:
             response = { "text": `Oops, i dont know response with postback ${payload}` }
     }

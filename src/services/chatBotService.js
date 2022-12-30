@@ -9,6 +9,9 @@ const IMAGE_CHANGE_BOOK = 'https://bit.ly/3jI0nla';
 const IMAGE_ISEKAI = 'https://bit.ly/3C6cBKL';
 const IMAGE_FANTASY = 'https://bit.ly/3G1CvAQ';
 const IMAGE_SLICE = 'https://bit.ly/3Z0BSjm';
+const IMAGE_DORAEMON = 'https://bit.ly/3Q1nQKh';
+const IMAGE_FAIRYTAIL = 'https://bit.ly/3voxi0P';
+const IMAGE_ONEPIECE = 'https://bit.ly/3VwPHn0';
 let callSendApi = (sender_psid, response) => {
     // Construct the message body
     let request_body = {
@@ -256,43 +259,38 @@ let sendMangaTemplate = () => {
                 "template_type": "generic",
                 "elements": [
                     {
-                        "title": "List Book Milkyway",
-                        "subtitle": "We are please to offer you a list book",
-                        "image_url": IMAGE_LIST_BOOK,
+                        "title": "Doraemon",
+                        "subtitle": "We have list of doraemon manga",
+                        "image_url": IMAGE_DORAEMON,
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "NOVEL",
-                                "payload": "NOVEL",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "MANGA",
-                                "payload": "MANGA",
+                                "title": "VIEW DETAILS",
+                                "payload": "VIEW_DORAEMON",
                             },
                         ],
                     },
                     {
-                        "title": "Open Hour",
-                        "subtitle": "MON-FRI 8AM-9AM | SAR 9AM-10AM | SUN 10AM-11AM",
-                        "image_url": IMAGE_OPEN,
+                        "title": "Fairy tails",
+                        "subtitle": "We have manga Fairy tails",
+                        "image_url": IMAGE_FAIRYTAIL,
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "ORDER BOOK",
-                                "payload": "ORDER_BOOK",
+                                "title": "VIEW DETAILS",
+                                "payload": "VIEW_FAIRYTAIL",
                             },
                         ],
                     },
                     {
-                        "title": "Change book",
-                        "subtitle": "We are willing to accept book exchanges",
-                        "image_url": IMAGE_CHANGE_BOOK,
+                        "title": "One piece",
+                        "subtitle": "We have One piece manga",
+                        "image_url": IMAGE_ONEPIECE,
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "CHANGE BOOK",
-                                "payload": "CHANGE_BOOK",
+                                "title": "VIEW DETAILS",
+                                "payload": "VIEW_ONEPIECE",
                             },
                         ],
                     },
