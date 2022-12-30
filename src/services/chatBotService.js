@@ -2,7 +2,10 @@ require('dotenv').config();
 import request from "request";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-const IMAGE_GET_STARTED = 'https://bit.ly/3YSwBKR'
+const IMAGE_GET_STARTED = 'https://bit.ly/3YSwBKR';
+const IMAGE_LIST_BOOK = 'https://bit.ly/3I7lVlH';
+const IMAGE_OPEN = 'https://bit.ly/3vnqAs7';
+const IMAGE_CHANGE_BOOK = 'https://bit.ly/3i0JJgl';
 let callSendApi = (sender_psid, response) => {
     // Construct the message body
     let request_body = {
@@ -121,7 +124,7 @@ let sendListBookTemplate = () => {
                     {
                         "title": "List Book Milkyway",
                         "subtitle": "We are please to offer you a list book",
-                        "image_url": IMAGE_GET_STARTED,
+                        "image_url": IMAGE_LIST_BOOK,
                         "buttons": [
                             {
                                 "type": "postback",
@@ -143,7 +146,7 @@ let sendListBookTemplate = () => {
                     {
                         "title": "Open Hour",
                         "subtitle": "MON-FRI 8AM-9AM | SAR 9AM-10AM | SUN 10AM-11AM",
-                        "image_url": IMAGE_GET_STARTED,
+                        "image_url": IMAGE_OPEN,
                         "buttons": [
                             {
                                 "type": "postback",
@@ -155,7 +158,7 @@ let sendListBookTemplate = () => {
                     {
                         "title": "Change book",
                         "subtitle": "We are willing to accept book exchanges",
-                        "image_url": IMAGE_GET_STARTED,
+                        "image_url": IMAGE_CHANGE_BOOK,
                         "buttons": [
                             {
                                 "type": "postback",
