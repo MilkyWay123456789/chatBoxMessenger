@@ -15,7 +15,10 @@ const IMAGE_ONEPIECE = 'https://bit.ly/3VwPHn0';
 const IMAGE_BACK = 'https://bit.ly/3Z1aNg0';
 const IMAGE_COTE = 'https://bit.ly/3IcgBNW';
 const IMAGE_5CMS = 'https://bit.ly/3jFf4FE';
-const IMAGE_YOURNAME = 'https://bit.ly/3jFf4FE';
+const IMAGE_YOURNAME = 'https://bit.ly/3WOzlYp';
+const IMAGE_BERSERK = 'https://bit.ly/3Q4xmfC';
+const IMAGE_GRIMGAS = 'https://bit.ly/3G29sgw';
+const IMAGE_KONOSYBA = 'https://bit.ly/3YZaGS5'
 
 let callSendApi = (sender_psid, response) => {
     // Construct the message body
@@ -384,10 +387,51 @@ let getDetailNovelTemplate = () => {
     return response;
 }
 
+let getDetailFantasyTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "Berserk of Guttony",
+                        "subtitle": "150.000 VND",
+                        "image_url": IMAGE_BERSERK,
+                    },
+                    {
+                        "title": "GRIMGAS OF FANTASY",
+                        "subtitle": "90.000 VND",
+                        "image_url": IMAGE_GRIMGAS,
+                    },
+                    {
+                        "title": "Konosuba",
+                        "subtitle": "130.000 VND",
+                        "image_url": IMAGE_KONOSYBA,
+                    },
+                    {
+                        "title": "Go back",
+                        "subtitle": "Go back to list book",
+                        "image_url": IMAGE_BACK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "GO BACK",
+                                "payload": "BACK_TO_LIST_BOOK",
+                            },
+                        ],
+                    },
+                ]
+            }
+        }
+    }
+    return response;
+}
+
 let handleDetailFantasy = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = getDetailNovelTemplate();
+            let responseTem = getDetailFantasyTemplate();
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
