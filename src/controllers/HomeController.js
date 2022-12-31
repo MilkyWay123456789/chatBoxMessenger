@@ -272,7 +272,31 @@ let orderBook = (req, res) => {
 }
 
 let handlePostOrderBook = (req, res) => {
+    try {
+        let customerName = "";
+        if (req.body.customerName === "") {
+            customerName = "Để trống"
+        } else customerName = req.body.customerName
 
+        let response = {
+            "text": `----Thông tin khách hàng------
+             \nHọ và tên :${customerName}
+             \nEmail: ${req.body.email}
+             \nSố điện thoại :${req.body.phoneNumber}
+             \nĐịa chỉ :${req.body.address}
+             `
+        };
+
+        await chatBotService.callSendApi(req.body.psid, response);
+        return res.status(200).json({
+            message: 'OK'
+        })
+    } catch (e) {
+        console.log("Error order book", e);
+        return res.status(500).json({
+            message: 'Error order book'
+        })
+    }
 }
 
 module.exports = {

@@ -624,4 +624,5 @@ module.exports = {
     handleDetailFantasy: handleDetailFantasy,
     handleDetailSlice: handleDetailSlice,
     handleChangeBook: handleChangeBook,
+    callSendApi: callSendApi,
 }
