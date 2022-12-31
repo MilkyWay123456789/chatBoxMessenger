@@ -13,7 +13,9 @@ let initWebRoutes = (app) => {
     router.post("/setup-persistent-menu", homeController.setupPersistentMenu);
 
     router.post('/webhook', homeController.postWebhook);
-    router.get('/webhook', homeController.getWebhook)
+    router.get('/webhook', homeController.getWebhook);
+
+    router.get('/order-book', homeController.orderBook);
     return app.use('/', router);
 }
 

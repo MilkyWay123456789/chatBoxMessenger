@@ -158,9 +158,11 @@ let sendGetStartedTemplate = () => {
                             "payload": "MAIN_BOOK",
                         },
                         {
-                            "type": "postback",
+                            "type": "web_url",
+                            "url": `${process.env.URL_ORDER_BOOK}`,
                             "title": "ORDER BOOK",
-                            "payload": "ORDER_BOOK",
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true,
                         },
                         {
                             "type": "postback",
@@ -218,9 +220,11 @@ let sendListBookTemplate = () => {
                         "image_url": IMAGE_OPEN,
                         "buttons": [
                             {
-                                "type": "postback",
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}`,
                                 "title": "ORDER BOOK",
-                                "payload": "ORDER_BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
                             },
                         ],
                     },
@@ -582,9 +586,11 @@ let getButtonTemplate = () => {
                         "payload": "MAIN_BOOK",
                     },
                     {
-                        "type": "postback",
+                        "type": "web_url",
+                        "url": `${process.env.URL_ORDER_BOOK}`,
                         "title": "ORDER BOOK",
-                        "payload": "ORDER_BOOK",
+                        "webview_height_ratio": "tall",
+                        "messenger_extensions": true,
                     },
                 ]
             }

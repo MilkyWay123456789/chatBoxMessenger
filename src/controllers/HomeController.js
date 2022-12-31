@@ -267,10 +267,15 @@ let setupPersistentMenu = async (req, res) => {
     return res.send("Setup persistent menu succeed!")
 }
 
+let orderBook = (req, res) => {
+    return res.render('orderbook.ejs');
+}
+
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
-    setupPersistentMenu: setupPersistentMenu
+    setupPersistentMenu: setupPersistentMenu,
+    orderBook: orderBook
 }
