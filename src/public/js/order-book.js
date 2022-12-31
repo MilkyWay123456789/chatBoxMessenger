@@ -18,7 +18,7 @@ window.extAsyncInit = function () {
         },
         function error(err) {
             // error
-            console.log('Lỗi đặt bàn Eric bot', err);
+            console.log('Error order book MilkyWay bot', err);
         }
     );
 };
@@ -29,6 +29,7 @@ function validateInputFields() {
 
     let email = $("#email");
     let phoneNumber = $("#phoneNumber");
+    let address = $("#address");
 
     if (!email.val().match(EMAIL_REG)) {
         email.addClass("is-invalid");
