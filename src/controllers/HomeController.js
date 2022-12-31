@@ -271,11 +271,16 @@ let orderBook = (req, res) => {
     return res.render('orderbook.ejs');
 }
 
+let handlePostOrderBook = (req, res) => {
+
+}
+
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
     setupPersistentMenu: setupPersistentMenu,
-    orderBook: orderBook
+    orderBook: orderBook,
+    handlePostOrderBook: handlePostOrderBook
 }
