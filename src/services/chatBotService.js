@@ -141,7 +141,7 @@ let handleWithStarted = (sender_psid) => {
     })
 }
 
-let sendGetStartedTemplate = () => {
+let sendGetStartedTemplate = (senderID) => {
     let response = {
         "attachment": {
             "type": "template",
@@ -159,7 +159,7 @@ let sendGetStartedTemplate = () => {
                         },
                         {
                             "type": "web_url",
-                            "url": `${process.env.URL_ORDER_BOOK}`,
+                            "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
                             "title": "ORDER BOOK",
                             "webview_height_ratio": "tall",
                             "messenger_extensions": true,
@@ -180,7 +180,7 @@ let sendGetStartedTemplate = () => {
 let handleSendListBook = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = sendListBookTemplate();
+            let responseTem = sendListBookTemplate(sender_psid);
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -190,7 +190,7 @@ let handleSendListBook = (sender_psid) => {
     })
 }
 
-let sendListBookTemplate = () => {
+let sendListBookTemplate = (senderID) => {
     let response = {
         "attachment": {
             "type": "template",
@@ -221,7 +221,7 @@ let sendListBookTemplate = () => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}`,
+                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -250,7 +250,7 @@ let sendListBookTemplate = () => {
 let handleSendNovel = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = sendNovelTemplate();
+            let responseTem = sendNovelTemplate(sender_psid);
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -400,7 +400,7 @@ let sendMangaTemplate = () => {
 let handleDetailNovel = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = getDetailNovelTemplate();
+            let responseTem = getDetailNovelTemplate(sender_psid);
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -410,7 +410,7 @@ let handleDetailNovel = (sender_psid) => {
     })
 }
 
-let getDetailNovelTemplate = () => {
+let getDetailNovelTemplate = (senderID) => {
     let response = {
         "attachment": {
             "type": "template",
@@ -421,16 +421,43 @@ let getDetailNovelTemplate = () => {
                         "title": "Classroomm of elite",
                         "subtitle": "100.000 VND",
                         "image_url": IMAGE_COTE,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "title": "ORDER BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
+                            },
+                        ],
                     },
                     {
                         "title": "5CM/S",
                         "subtitle": "120.000 VND",
                         "image_url": IMAGE_5CMS,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "title": "ORDER BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
+                            },
+                        ],
                     },
                     {
                         "title": "Your Name",
                         "subtitle": "200.000 VND",
                         "image_url": IMAGE_YOURNAME,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "title": "ORDER BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
+                            },
+                        ],
                     },
                     {
                         "title": "Go back",
@@ -454,7 +481,7 @@ let getDetailNovelTemplate = () => {
 let handleDetailFantasy = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = getDetailFantasyTemplate();
+            let responseTem = getDetailFantasyTemplate(sender_psid);
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -464,7 +491,7 @@ let handleDetailFantasy = (sender_psid) => {
     })
 }
 
-let getDetailFantasyTemplate = () => {
+let getDetailFantasyTemplate = (senderID) => {
     let response = {
         "attachment": {
             "type": "template",
@@ -475,16 +502,43 @@ let getDetailFantasyTemplate = () => {
                         "title": "Berserk of Guttony",
                         "subtitle": "150.000 VND",
                         "image_url": IMAGE_BERSERK,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "title": "ORDER BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
+                            },
+                        ],
                     },
                     {
                         "title": "GRIMGAS OF FANTASY",
                         "subtitle": "90.000 VND",
                         "image_url": IMAGE_GRIMGAS,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "title": "ORDER BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
+                            },
+                        ],
                     },
                     {
                         "title": "Konosuba",
                         "subtitle": "130.000 VND",
                         "image_url": IMAGE_KONOSYBA,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "title": "ORDER BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
+                            },
+                        ],
                     },
                     {
                         "title": "Go back",
@@ -508,7 +562,7 @@ let getDetailFantasyTemplate = () => {
 let handleDetailSlice = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = getDetailSliceTemplate();
+            let responseTem = getDetailSliceTemplate(sender_psid);
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -518,7 +572,7 @@ let handleDetailSlice = (sender_psid) => {
     })
 }
 
-let getDetailSliceTemplate = () => {
+let getDetailSliceTemplate = (senderID) => {
     let response = {
         "attachment": {
             "type": "template",
@@ -529,16 +583,43 @@ let getDetailSliceTemplate = () => {
                         "title": "Horimiya",
                         "subtitle": "80.000 VND",
                         "image_url": IMAGE_HORIMIYA,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "title": "ORDER BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
+                            },
+                        ],
                     },
                     {
                         "title": "Hige no woru",
                         "subtitle": "110.000 VND",
                         "image_url": IMAGE_HIGENOWORU,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "title": "ORDER BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
+                            },
+                        ],
                     },
                     {
                         "title": "Angel next door",
                         "subtitle": "130.000 VND",
                         "image_url": IMAGE_ANGELNEXTDOOR,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "title": "ORDER BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
+                            },
+                        ],
                     },
                     {
                         "title": "Go back",
@@ -572,7 +653,7 @@ let getImageChangBookTemplate = () => {
     return response;
 }
 
-let getButtonTemplate = () => {
+let getButtonTemplate = (senderID) => {
     let response = {
         "attachment": {
             "type": "template",
@@ -587,7 +668,7 @@ let getButtonTemplate = () => {
                     },
                     {
                         "type": "web_url",
-                        "url": `${process.env.URL_ORDER_BOOK}`,
+                        "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
                         "title": "ORDER BOOK",
                         "webview_height_ratio": "tall",
                         "messenger_extensions": true,
@@ -603,9 +684,9 @@ let handleChangeBook = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             //send an image
-            let responseTem = getImageChangBookTemplate();
+            let responseTem = getImageChangBookTemplate(sender_psid);
             //send button
-            let responseButton = getButtonTemplate();
+            let responseButton = getButtonTemplate(sender_psid);
             await callSendApi(sender_psid, responseTem);
             await callSendApi(sender_psid, responseButton);
             resolve("done")
