@@ -129,7 +129,7 @@ let handleWithStarted = (sender_psid) => {
         try {
             let username = await getUserName(sender_psid);
             let responseName = { "text": `Xin chào bạn ${username} đến với MilkyWay` }
-            let responseTem = sendGetStartedTemplate();
+            let responseTem = sendGetStartedTemplate(sender_psid);
             //send text message
             await callSendApi(sender_psid, responseName);
             //send generic message template
@@ -250,7 +250,7 @@ let sendListBookTemplate = (senderID) => {
 let handleSendNovel = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = sendNovelTemplate(sender_psid);
+            let responseTem = sendNovelTemplate();
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
