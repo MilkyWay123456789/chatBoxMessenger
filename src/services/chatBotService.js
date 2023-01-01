@@ -159,7 +159,7 @@ let sendGetStartedTemplate = (senderID) => {
                         },
                         {
                             "type": "web_url",
-                            "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                            "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                             "title": "ORDER BOOK",
                             "webview_height_ratio": "tall",
                             "messenger_extensions": true,
@@ -221,7 +221,7 @@ let sendListBookTemplate = (senderID) => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -424,7 +424,7 @@ let getDetailNovelTemplate = (senderID) => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -438,7 +438,7 @@ let getDetailNovelTemplate = (senderID) => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -452,7 +452,7 @@ let getDetailNovelTemplate = (senderID) => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -505,7 +505,7 @@ let getDetailFantasyTemplate = (senderID) => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -519,7 +519,7 @@ let getDetailFantasyTemplate = (senderID) => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -533,7 +533,7 @@ let getDetailFantasyTemplate = (senderID) => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -586,7 +586,7 @@ let getDetailSliceTemplate = (senderID) => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -600,7 +600,7 @@ let getDetailSliceTemplate = (senderID) => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -614,7 +614,7 @@ let getDetailSliceTemplate = (senderID) => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                                 "title": "ORDER BOOK",
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,
@@ -668,7 +668,7 @@ let getButtonTemplate = (senderID) => {
                     },
                     {
                         "type": "web_url",
-                        "url": `${process.env.URL_ORDER_BOOK}?senderId=${senderID}`,
+                        "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
                         "title": "ORDER BOOK",
                         "webview_height_ratio": "tall",
                         "messenger_extensions": true,
