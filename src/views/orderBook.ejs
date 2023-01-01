@@ -18,8 +18,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Load custom Javascript and CSS-->
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/order-book.js"></script>
+    <script src="../public/js/order-book.js"></script>
 </head>
+
 
 <body>
     <div class="container fix-height">
@@ -62,7 +63,7 @@
                         target="_blank">Chatbot Tutorial</a></span>
                 <span class="ml-3">
                     Tạo bởi <a href="https://www.youtube.com/channel/UCVkBcokjObNZiXavfAE1-fA?sub_confirmation=1"
-                        title="Xem kênh Hỏi Dân IT" target="_blank">Hỏi Dân IT</a>
+                        title="Xem kênh Hỏi Dân IT" target="_blank">HT-CREATER</a>
                 </span>
             </div>
         </div>
@@ -70,3 +71,101 @@
 </body>
 
 </html>
+
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+
+    window.extAsyncInit = function () {
+        // the Messenger Extensions JS SDK is done loading 
+
+        MessengerExtensions.getContext('544488527636794',
+            function success(thread_context) {
+                // success
+                //set psid to input
+                $("#psid").val(thread_context.psid);
+                handleClickButtonOrderBook();
+            },
+            function error(err) {
+                // error
+                console.log('Error order book MilkyWay bot', err);
+            }
+        );
+    };
+
+    //validate inputs
+    function validateInputFields() {
+        const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
+
+        let email = $("#email");
+        let phoneNumber = $("#phoneNumber");
+        let address = $("#address");
+
+        if (!email.val().match(EMAIL_REG)) {
+            email.addClass("is-invalid");
+            return true;
+        } else {
+            email.removeClass("is-invalid");
+        }
+
+        if (phoneNumber.val() === "") {
+            phoneNumber.addClass("is-invalid");
+            return true;
+        } else {
+            phoneNumber.removeClass("is-invalid");
+        }
+
+        if (address.val() === "") {
+            address.addClass("is-invalid");
+            return true;
+        } else {
+            address.removeClass("is-invalid");
+        }
+
+        return false;
+    }
+
+
+    function handleClickButtonOrderBook() {
+        $("#btnOrderBook").on("click", function (e) {
+            alert("click me")
+            let check = validateInputFields(); //return true or false
+
+            let data = {
+                psid: $("#psid").val(),
+                customerName: $("#customerName").val(),
+                email: $("#email").val(),
+                phoneNumber: $("#phoneNumber").val(),
+                address: $("#address").val(),
+            };
+
+            if (!check) {
+                //close webview
+                MessengerExtensions.requestCloseBrowser(function success() {
+                    // webview closed
+                }, function error(err) {
+                    // an error occurred
+                    console.log(err);
+                });
+
+                //send data to node.js server 
+                $.ajax({
+                    url: `${window.location.origin}/order-book-ajax`,
+                    method: "POST",
+                    data: data,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                })
+            }
+        });
+    }
+</script>
