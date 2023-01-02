@@ -1,8 +1,44 @@
 require('dotenv').config();
 import request from "request";
-import chatBotService from "../services/chatBotService"
+import chatBotService from "../services/chatBotService";
+import moment from "moment";
+const { GoogleSpreadsheet } = require('google-spreadsheet');
 
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const SPREADSHET_ID = process.env.SPREADSHET_ID;
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const CLIENT_EMAIL = process.env.CLIENT_EMAIL;
+
+let writeDataToGoogleSheet = async (data) => {
+    let currentDate = new Date();
+
+    const format = "HH:mm DD/MM/YYYY"
+
+    let formatedDate = moment(currentDate).format(format);
+
+    // Initialize the sheet - doc ID is the long id in the sheets URL
+    const doc = new GoogleSpreadsheet(SPREADSHET_ID);
+
+    // Initialize Auth - see more available options at https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication
+    await doc.useServiceAccountAuth({
+        client_email: CLIENT_EMAIL,
+        private_key: PRIVATE_KEY,
+    });
+
+    await doc.loadInfo(); // loads document properties and worksheets
+
+    const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
+
+    // append rows
+    await sheet.addRow(
+        {
+            "Tên Facebook": data.username,
+            "Email": data.email,
+            "Số điện thoại": data.phoneNumber,
+            "Thời gian": formatedDate,
+            "Tên khách hàng": data.customerName,
+        });
+}
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
@@ -276,6 +312,15 @@ let orderBook = (req, res) => {
 
 let handlePostOrderBook = async (req, res) => {
     try {
+        //write data to googlesheet
+        let data = {
+            username: await chatBotService.getUserName(req.body.psid),
+            email: req.body.email,
+            phoneNumber: req.body.phoneNumber,
+            customerName: req.body.customerName,
+        }
+        await writeDataToGoogleSheet(data);
+
         let customerName = "";
         if (req.body.customerName === "") {
             customerName = await chatBotService.getUserName(req.body.psid)
