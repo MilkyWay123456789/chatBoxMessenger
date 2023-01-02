@@ -34,7 +34,7 @@ let writeDataToGoogleSheet = async (data) => {
         {
             "Tên Facebook": data.username,
             "Email": data.email,
-            "Số điện thoại": `'` + data.phoneNumber,
+            "Số điện thoại": data.phoneNumber,
             "Thời gian": formatedDate,
             "Tên khách hàng": data.customerName,
         });
@@ -316,7 +316,7 @@ let handlePostOrderBook = async (req, res) => {
         let data = {
             username: await chatBotService.getUserName(req.body.psid),
             email: req.body.email,
-            phoneNumber: req.body.phoneNumber,
+            phoneNumber: `'${req.body.phoneNumber}`,
             customerName: req.body.customerName,
         }
         await writeDataToGoogleSheet(data);
