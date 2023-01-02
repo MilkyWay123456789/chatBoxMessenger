@@ -1,4 +1,5 @@
 require('dotenv').config();
+import { response } from "express";
 import request from "request";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -28,6 +29,7 @@ const IMAGE_HIGENOWORU = 'https://bit.ly/3YZcACd';
 const IMAGE_ANGELNEXTDOOR = 'https://bit.ly/3GsdZdg';
 
 const IMAGE_CHANGE_DETAIL_BOOK = 'https://bit.ly/3CbMa6N';
+const IMAGE_GIF_WELCOME = 'https://media0.giphy.com/media/LkjlH3rVETgsg/giphy.gif?cid=790b7611230b5e3e315e9c4a97fc73520ee929a8dee79369&rid=giphy.gif&ct=g';
 
 let callSendApi = async (sender_psid, response) => {
     // Construct the message body
@@ -129,10 +131,15 @@ let handleWithStarted = (sender_psid) => {
         try {
             let username = await getUserName(sender_psid);
             let responseName = { "text": `Xin chào bạn ${username} đến với MilkyWay` }
-            let responseTem = sendGetStartedTemplate(sender_psid);
+            //let responseTem = sendGetStartedTemplate(sender_psid);
+            let responseTem = getStartedQuickReplyTemplate(sender_psid);
+            //send gif
+            let responseImage = getStartedImageTemplate();
             //send text message
             await callSendApi(sender_psid, responseName);
             //send generic message template
+            await callSendApi(sender_psid, responseImage);
+
             await callSendApi(sender_psid, responseTem);
             resolve("done")
         } catch (e) {
@@ -173,6 +180,26 @@ let sendGetStartedTemplate = (senderID) => {
                 }]
             }
         }
+    }
+    return response;
+}
+
+let getStartedImageTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "image",
+            "payload": {
+                "url": IMAGE_GIF_WELCOME,
+                "is_reusable": true
+            }
+        }
+    }
+    return response;
+}
+
+let getStartedQuickReplyTemplate = () => {
+    let reponse = {
+
     }
     return response;
 }
@@ -706,5 +733,5 @@ module.exports = {
     handleDetailSlice: handleDetailSlice,
     handleChangeBook: handleChangeBook,
     callSendApi: callSendApi,
-    getUserName:getUserName
+    getUserName: getUserName
 }
