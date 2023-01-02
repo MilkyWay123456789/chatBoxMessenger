@@ -706,4 +706,5 @@ module.exports = {
     handleDetailSlice: handleDetailSlice,
     handleChangeBook: handleChangeBook,
     callSendApi: callSendApi,
+    getUserName:getUserName
 }
