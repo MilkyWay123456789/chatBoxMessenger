@@ -11,9 +11,7 @@ const CLIENT_EMAIL = process.env.CLIENT_EMAIL;
 
 let writeDataToGoogleSheet = async (data) => {
     let currentDate = new Date();
-
     const format = "HH:mm DD/MM/YYYY"
-
     let formatedDate = moment(currentDate).format(format);
 
     // Initialize the sheet - doc ID is the long id in the sheets URL
@@ -34,9 +32,10 @@ let writeDataToGoogleSheet = async (data) => {
         {
             "Tên Facebook": data.username,
             "Email": data.email,
-            "Số điện thoại": data.phoneNumber,
+            "Số điện thoại": data.phoneNumber,
             "Thời gian": formatedDate,
             "Tên khách hàng": data.customerName,
+            "Địa chỉ": data.address,
         });
 }
 //process.env.NAME_VARIABLES
@@ -318,6 +317,7 @@ let handlePostOrderBook = async (req, res) => {
             email: req.body.email,
             phoneNumber: `'${req.body.phoneNumber}`,
             customerName: req.body.customerName,
+            address: req.body.address,
         }
         await writeDataToGoogleSheet(data);
 
