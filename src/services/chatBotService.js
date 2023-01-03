@@ -198,7 +198,7 @@ let getStartedImageTemplate = () => {
 }
 
 let getStartedQuickReplyTemplate = () => {
-    let reponse = {
+    let response = {
         "text": "Choose the option:",
         "quick_replies": [
             {
