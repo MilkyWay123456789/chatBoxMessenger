@@ -199,7 +199,24 @@ let getStartedImageTemplate = () => {
 
 let getStartedQuickReplyTemplate = () => {
     let reponse = {
-
+        "text": "Choose the option:",
+        "quick_replies": [
+            {
+                "content_type": "text",
+                "title": "LIST BOOK",
+                "payload": "MAIN_BOOK",
+            },
+            {
+                "content_type": "text",
+                "title": "ORDER BOOK",
+                "payload": "<POSTBACK_PAYLOAD>",
+            },
+            {
+                "content_type": "text",
+                "title": "GUIDE",
+                "payload": "GUIDE_TO_USE",
+            }
+        ]
     }
     return response;
 }
