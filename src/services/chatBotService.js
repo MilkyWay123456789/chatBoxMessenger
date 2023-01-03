@@ -214,11 +214,6 @@ let getStartedQuickReplyTemplate = () => {
             },
             {
                 "content_type": "text",
-                "title": "ORDER BOOK",
-                "payload": "<POSTBACK_PAYLOAD>",
-            },
-            {
-                "content_type": "text",
                 "title": "GUIDE",
                 "payload": "GUIDE_TO_USE",
             }
