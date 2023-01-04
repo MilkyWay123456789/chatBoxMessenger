@@ -77,8 +77,8 @@ function handleClickButtonOrderBook() {
                 // an error occurred
                 console.log(err);
                 callAjax(data);
-                $("#customerInfo").css("dislay", "none");
-                $("#handleError").css("dislay", "block");
+                $("#customerInfo").css("display", "none");
+                $("#handleError").css("display", "block");
             });
 
 
