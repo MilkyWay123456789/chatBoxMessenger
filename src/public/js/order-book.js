@@ -72,11 +72,11 @@ function handleClickButtonOrderBook() {
             //close webview
             MessengerExtensions.requestCloseBrowser(function success() {
                 // webview closed
-                callAjax();
+                callAjax(data);
             }, function error(err) {
                 // an error occurred
                 console.log(err);
-                callAjax();
+                callAjax(data);
                 $("#customerInfo").css("dislay", "none");
                 $("#handleError").css("dislay", "block");
             });
@@ -87,7 +87,7 @@ function handleClickButtonOrderBook() {
     });
 }
 
-function callAjax(cb) {
+function callAjax(data) {
     //send data to node.js server 
     $.ajax({
         url: `${window.location.origin}/order-book-ajax`,
