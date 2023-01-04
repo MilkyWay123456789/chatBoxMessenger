@@ -11,10 +11,8 @@ const CLIENT_EMAIL = process.env.CLIENT_EMAIL;
 
 let writeDataToGoogleSheet = async (data) => {
     let currentDate = new Date();
-    let currentVnDate = new Date().toLocaleString("vi-VN", { timeZone: 'Asia/Ho_Chi_Minh' });
     const format = "HH:mm DD/MM/YYYY"
-    let formatedDate = moment(currentVnDate).format(format);
-
+    let formatedDate = new Date().toLocaleString("vi-VN", { timeZone: 'Asia/Ho_Chi_Minh' });
     // Initialize the sheet - doc ID is the long id in the sheets URL
     const doc = new GoogleSpreadsheet(SPREADSHET_ID);
 
