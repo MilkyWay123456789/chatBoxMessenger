@@ -161,6 +161,8 @@
                 //close webview
                 MessengerExtensions.requestCloseBrowser(function success() {
                     // webview closed
+                    $("#customerInfo").css("display", "none");
+                    $("#handleError").css("display", "block");
                 }, function error(err) {
                     // an error occurred
                     console.log(err);
