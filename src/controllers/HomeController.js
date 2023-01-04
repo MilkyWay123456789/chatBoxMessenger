@@ -115,6 +115,9 @@ async function handleMessage(sender_psid, received_message) {
         if (received_message.quick_reply.payload === 'MAIN_BOOK') {
             await chatBotService.handleSendListBook(sender_psid)
         }
+        if (received_message.quick_reply.payload === 'GUIDE_TO_USE') {
+            await chatBotService.handleGuideToUseBot(sender_psid)
+        }
         return;
     }
     // Checks if the message contains text
