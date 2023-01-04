@@ -75,21 +75,20 @@ function handleClickButtonOrderBook() {
             }, function error(err) {
                 // an error occurred
                 console.log(err);
-                $.ajax({
-                    url: `${window.location.origin}/order-book-ajax`,
-                    method: "POST",
-                    data: data,
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                })
-                $("#customerInfo").css("display", "none");
-                $("#handleError").css("display", "block");
             });
-
+            $.ajax({
+                url: `${window.location.origin}/order-book-ajax`,
+                method: "POST",
+                data: data,
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+            // $("#customerInfo").css("display", "none");
+            // $("#handleError").css("display", "block");
 
 
         }
