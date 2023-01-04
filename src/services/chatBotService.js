@@ -749,8 +749,10 @@ let handleGuideToUseBot=(sender_psid)=>{
             let responseName = { "text": `Xin chào bạn ${username} đến với MilkyWay\n Để biết thêm thông tin vui lòng xem bên dưới 😂` }
             //send media template
             let responseGuide = { "text": 'Bấm vào nút bắt đầu đẻ sử dụng bot \n Tiếp tục bấm vào List Bôk để xem danh mục sách của cửa hàng\nSẽ có hai lựa chọn là Novel và Mâng, click vào từng lựa chọn đẻ xem sách\n Nút VIEW DETAILS giúp bạn xem chi tiết thông tin sách\n Bấm vào nút ORDER BOOK sẽ hiện ra một ưebview đẻ bạn điièn thông tin vào để đặt sách\n Ngoài ra còn có nút GO BACK giúp bạn quay lại lựa chọn trước đố\nBạn có thể xem trang Fanpage và youtube của cửa hàng thông qua các lựa chọn trên Menu Presistants \nBấm Restart this bot nếu bạn muốn khởi động lại bot' }
+            let responseTem = getStartedQuickReplyTemplate(sender_psid);
             await callSendApi(sender_psid, responseName);
             await callSendApi(sender_psid, responseGuide);
+            await callSendApi(sender_psid, responseTem);
             resolve("done")
         } catch (e) {
             reject(e)
