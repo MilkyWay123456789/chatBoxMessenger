@@ -23,12 +23,18 @@
     <!-- Load custom Javascript and CSS-->
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/order-book.js"></script>
+    <style>
+        .handleError {
+            display: none;
+            padding: 15px;
+        }
+    </style>
 </head>
 
 
 <body>
     <div class="container fix-height">
-        <div class="row">
+        <div class="row" id="customerInfo">
             <div class="col-12">
                 <div class="text-center mt-3">
                     <span class="title">Thông tin khách hàng</span>
@@ -57,7 +63,9 @@
             </div>
 
         </div>
-
+        <div class="row handleError" id="handleError">
+            <h5>Thông tin của bạn đã được ghi nhận thành công! Vui lòng đóng popup này. </h5>
+        </div>
     </div>
     <footer>
         <div class="text-center">
@@ -153,24 +161,30 @@
                 //close webview
                 MessengerExtensions.requestCloseBrowser(function success() {
                     // webview closed
+                    callAjax();
                 }, function error(err) {
                     // an error occurred
                     console.log(err);
+                    callAjax();
+                    $("#customerInfo").css("dislay", "none");
+                    $("#handleError").css("dislay", "block");
                 });
-
-                //send data to node.js server 
-                $.ajax({
-                    url: `${window.location.origin}/order-book-ajax`,
-                    method: "POST",
-                    data: data,
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                })
             }
         });
+    }
+
+    function callAjax(cb) {
+        //send data to node.js server 
+        $.ajax({
+            url: `${window.location.origin}/order-book-ajax`,
+            method: "POST",
+            data: data,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
     }
 </script>

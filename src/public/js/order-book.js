@@ -72,24 +72,33 @@ function handleClickButtonOrderBook() {
             //close webview
             MessengerExtensions.requestCloseBrowser(function success() {
                 // webview closed
+                callAjax();
             }, function error(err) {
                 // an error occurred
                 console.log(err);
+                callAjax();
+                $("#customerInfo").css("dislay", "none");
+                $("#handleError").css("dislay", "block");
             });
 
-            //send data to node.js server 
-            $.ajax({
-                url: `${window.location.origin}/order-book-ajax`,
-                method: "POST",
-                data: data,
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            })
+
+
         }
     });
+}
+
+function callAjax(cb) {
+    //send data to node.js server 
+    $.ajax({
+        url: `${window.location.origin}/order-book-ajax`,
+        method: "POST",
+        data: data,
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
 }
 
