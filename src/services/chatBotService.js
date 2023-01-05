@@ -1,12 +1,14 @@
 require('dotenv').config();
 import { response } from "express";
 import request from "request";
+import db from "../models/index"
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const IMAGE_GET_STARTED = 'https://bit.ly/3YSwBKR';
 const IMAGE_LIST_BOOK = 'https://bit.ly/3I7lVlH';
 const IMAGE_OPEN = 'https://bit.ly/3vnqAs7';
 const IMAGE_CHANGE_BOOK = 'https://bit.ly/3jI0nla';
+
 const IMAGE_ISEKAI = 'https://bit.ly/3C6cBKL';
 const IMAGE_FANTASY = 'https://bit.ly/3G1CvAQ';
 const IMAGE_SLICE = 'https://bit.ly/3Z0BSjm';
@@ -295,7 +297,7 @@ let sendListBookTemplate = (senderID) => {
 let handleSendNovel = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = sendNovelTemplate();
+            let responseTem = await sendNovelTemplate();
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -305,65 +307,54 @@ let handleSendNovel = (sender_psid) => {
     })
 }
 
-let sendNovelTemplate = () => {
+let sendNovelTemplate = async () => {
+    let data = await db.Product.findAll({
+        raw: true
+    });
+
+    let elements = [];
+    if (data && data.length > 0) {
+        data.map(item => {
+            elements.push({
+                "title": item.title,
+                "subtitle": item.subtitle,
+                "image_url": item.image_url,
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "VIEW DETAILS",
+                        "payload": item.payload,
+                    },
+                ],
+            })
+        })
+    }
+
+    elements.push({
+        "title": "Go back",
+        "subtitle": "Go back to list book",
+        "image_url": IMAGE_BACK,
+        "buttons": [
+            {
+                "type": "postback",
+                "title": "GO BACK",
+                "payload": "BACK_TO_LIST_BOOK",
+            },
+        ],
+    })
     let response = {
         "attachment": {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": [
-                    {
-                        "title": "Isekai",
-                        "subtitle": "We have isekai hot novel",
-                        "image_url": IMAGE_ISEKAI,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "VIEW DETAILS",
-                                "payload": "VIEW_NOVEL",
-                            },
-                        ],
-                    },
-                    {
-                        "title": "Fantasy",
-                        "subtitle": "We have fantasy novel",
-                        "image_url": IMAGE_FANTASY,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "VIEW DETAILS",
-                                "payload": "VIEW_FANTASY",
-                            },
-                        ],
-                    },
-                    {
-                        "title": "Slice of Slice",
-                        "subtitle": "We have a lot of slice of slice novel",
-                        "image_url": IMAGE_SLICE,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "VIEW DETAILS",
-                                "payload": "VIEW_SLICEOFSLICE",
-                            },
-                        ],
-                    },
-                    {
-                        "title": "Go back",
-                        "subtitle": "Go back to list book",
-                        "image_url": IMAGE_BACK,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "GO BACK",
-                                "payload": "BACK_TO_LIST_BOOK",
-                            },
-                        ],
-                    },
-                ]
+                "elements": []
             }
         }
     }
+
+    response.attachment.payload.elements = elements;
+    console.log(">>>check response", response.attachment.payload.elements)
+
     return response;
 }
 
@@ -741,7 +732,7 @@ let handleChangeBook = (sender_psid) => {
     })
 }
 
-let handleGuideToUseBot=(sender_psid)=>{
+let handleGuideToUseBot = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             //send text
@@ -771,5 +762,6 @@ module.exports = {
     handleChangeBook: handleChangeBook,
     callSendApi: callSendApi,
     getUserName: getUserName,
-    handleGuideToUseBot:handleGuideToUseBot
+    handleGuideToUseBot: handleGuideToUseBot,
+    sendNovelTemplate: sendNovelTemplate
 }

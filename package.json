@@ -22,7 +22,12 @@
     "google-spreadsheet": "^3.3.0",
     "jquery": "^3.6.3",
     "moment": "^2.29.4",
-    "request": "^2.88.2"
+    "mysql2": "^2.3.3",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "request": "^2.88.2",
+    "sequelize": "^6.9.0",
+    "sequelize-cli": "^6.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

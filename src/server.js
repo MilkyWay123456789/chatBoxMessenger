@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import viewEngine from "./configs/viewEngine";
 import webRoutes from "./routes/web";
+import chatBotService from "./services/chatBotService"
 
 let app = express();
 
@@ -15,7 +16,7 @@ viewEngine(app);
 webRoutes(app);
 
 let port = process.env.PORT || 8080;
-
+chatBotService.sendNovelTemplate();
 app.listen(port, () => {
     console.log("App is running at the port: " + port);
 })
