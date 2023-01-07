@@ -3,8 +3,10 @@ import bodyParser from "body-parser";
 import viewEngine from "./configs/viewEngine";
 import webRoutes from "./routes/web";
 import chatBotService from "./services/chatBotService"
+var cors = require('cors')
+var app = express()
 
-let app = express();
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
