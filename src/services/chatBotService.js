@@ -8,14 +8,6 @@ const IMAGE_GET_STARTED = 'https://bit.ly/3YSwBKR';
 const IMAGE_LIST_BOOK = 'https://bit.ly/3I7lVlH';
 const IMAGE_OPEN = 'https://bit.ly/3vnqAs7';
 const IMAGE_CHANGE_BOOK = 'https://bit.ly/3jI0nla';
-
-const IMAGE_ISEKAI = 'https://bit.ly/3C6cBKL';
-const IMAGE_FANTASY = 'https://bit.ly/3G1CvAQ';
-const IMAGE_SLICE = 'https://bit.ly/3Z0BSjm';
-
-const IMAGE_DORAEMON = 'https://bit.ly/3Q1nQKh';
-const IMAGE_FAIRYTAIL = 'https://bit.ly/3voxi0P';
-const IMAGE_ONEPIECE = 'https://bit.ly/3VwPHn0';
 const IMAGE_BACK = 'https://bit.ly/3Z1aNg0';
 
 const IMAGE_COTE = 'https://bit.ly/3IcgBNW';
@@ -309,6 +301,7 @@ let handleSendNovel = (sender_psid) => {
 
 let sendNovelTemplate = async () => {
     let data = await db.Product.findAll({
+        where: { type: "NOVEL" },
         raw: true
     });
 
@@ -372,64 +365,54 @@ let handleSendManga = (sender_psid) => {
 }
 
 let sendMangaTemplate = () => {
+    let data = await db.Product.findAll({
+        where: { type: "MANGA" },
+        raw: true
+    });
+
+    let elements = [];
+    if (data && data.length > 0) {
+        data.map(item => {
+            elements.push({
+                "title": item.title,
+                "subtitle": item.subtitle,
+                "image_url": item.image_url,
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "VIEW DETAILS",
+                        "payload": item.payload,
+                    },
+                ],
+            })
+        })
+    }
+
+    elements.push({
+        "title": "Go back",
+        "subtitle": "Go back to list book",
+        "image_url": IMAGE_BACK,
+        "buttons": [
+            {
+                "type": "postback",
+                "title": "GO BACK",
+                "payload": "BACK_TO_LIST_BOOK",
+            },
+        ],
+    })
     let response = {
         "attachment": {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": [
-                    {
-                        "title": "Doraemon",
-                        "subtitle": "We have list of doraemon manga",
-                        "image_url": IMAGE_DORAEMON,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "VIEW DETAILS",
-                                "payload": "VIEW_DORAEMON",
-                            },
-                        ],
-                    },
-                    {
-                        "title": "Fairy tails",
-                        "subtitle": "We have manga Fairy tails",
-                        "image_url": IMAGE_FAIRYTAIL,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "VIEW DETAILS",
-                                "payload": "VIEW_FAIRYTAIL",
-                            },
-                        ],
-                    },
-                    {
-                        "title": "One piece",
-                        "subtitle": "We have One piece manga",
-                        "image_url": IMAGE_ONEPIECE,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "VIEW DETAILS",
-                                "payload": "VIEW_ONEPIECE",
-                            },
-                        ],
-                    },
-                    {
-                        "title": "Go back",
-                        "subtitle": "Go back to list book",
-                        "image_url": IMAGE_BACK,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "GO BACK",
-                                "payload": "BACK_TO_LIST_BOOK",
-                            },
-                        ],
-                    },
-                ]
+                "elements": []
             }
         }
     }
+
+    response.attachment.payload.elements = elements;
+    console.log(">>>check response", response.attachment.payload.elements)
+
     return response;
 }
 
