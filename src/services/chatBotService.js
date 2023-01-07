@@ -354,7 +354,7 @@ let sendNovelTemplate = async () => {
 let handleSendManga = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = sendMangaTemplate();
+            let responseTem = await sendMangaTemplate();
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
