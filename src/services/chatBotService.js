@@ -364,7 +364,7 @@ let handleSendManga = (sender_psid) => {
     })
 }
 
-let sendMangaTemplate = () => {
+let sendMangaTemplate = async () => {
     let data = await db.Product.findAll({
         where: { type: "MANGA" },
         raw: true

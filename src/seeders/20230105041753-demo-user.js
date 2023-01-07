@@ -36,21 +36,21 @@ module.exports = {
         "subtitle": "We have list of doraemon manga",
         "image_url": IMAGE_DORAEMON,
         "payload": "VIEW_DORAEMON",
-        "type": "MANGA"
+        "type": "MANGA",
       },
       {
         "title": "Fairy tails",
         "subtitle": "We have manga Fairy tails",
         "image_url": IMAGE_FAIRYTAIL,
         "payload": "VIEW_FAIRYTAIL",
-        "type": "MANGA"
+        "type": "MANGA",
       },
       {
         "title": "One piece",
         "subtitle": "We have One piece manga",
         "image_url": IMAGE_ONEPIECE,
         "payload": "VIEW_ONEPIECE",
-        "type": "MANGA"
+        "type": "MANGA",
       }
     ], {});
   },
