@@ -283,7 +283,7 @@ let sendListBookTemplate = (senderID) => {
             }
         }
     }
-    console.log(">>>check response",response);
+    console.log(">>>check response",response.attachment.payload.elements);
     return response;
 }
 
@@ -748,5 +748,6 @@ module.exports = {
     getUserName: getUserName,
     handleGuideToUseBot: handleGuideToUseBot,
     sendNovelTemplate: sendNovelTemplate,
-    sendMangaTemplate: sendMangaTemplate
+    sendMangaTemplate: sendMangaTemplate,
+    sendListBookTemplate:sendListBookTemplate
 }
