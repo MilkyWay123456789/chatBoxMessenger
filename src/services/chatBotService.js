@@ -219,7 +219,7 @@ let getStartedQuickReplyTemplate = () => {
 let handleSendListBook = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = sendListBookTemplate(sender_psid);
+            let responseTem = sendNovelTemplate(sender_psid);
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -302,7 +302,7 @@ let handleSendNovel = (sender_psid) => {
 
 let sendNovelTemplate = async () => {
     let data = await db.Product.findAll({
-        //where: { type: "NOVEL" },
+        where: { type: "NOVEL" },
         raw: true
     });
 
@@ -367,7 +367,7 @@ let handleSendManga = (sender_psid) => {
 
 let sendMangaTemplate = async () => {
     let data = await db.Product.findAll({
-        //where: { type: "MANGA" },
+        where: { type: "MANGA" },
         raw: true
     });
 
