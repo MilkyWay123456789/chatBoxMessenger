@@ -219,7 +219,7 @@ let getStartedQuickReplyTemplate = () => {
 let handleSendListBook = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = sendNovelTemplate(sender_psid);
+            let responseTem = getDetailNovelTemplate(sender_psid);
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
