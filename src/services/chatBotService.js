@@ -131,8 +131,8 @@ let handleWithStarted = (sender_psid) => {
         try {
             let username = await getUserName(sender_psid);
             let responseName = { "text": `Xin chào bạn ${username} đến với MilkyWay` }
-            let responseTem = sendGetStartedTemplate(sender_psid);
-            //let responseTem = getStartedQuickReplyTemplate(sender_psid);
+            //let responseTem = sendGetStartedTemplate(sender_psid);
+            let responseTem = getStartedQuickReplyTemplate(sender_psid);
             //send gif
             let responseImage = getStartedImageTemplate();
             //send text message
@@ -302,7 +302,7 @@ let handleSendNovel = (sender_psid) => {
 
 let sendNovelTemplate = async () => {
     let data = await db.Product.findAll({
-        where: { type: "NOVEL" },
+        //where: { type: "NOVEL" },
         raw: true
     });
 
@@ -367,7 +367,7 @@ let handleSendManga = (sender_psid) => {
 
 let sendMangaTemplate = async () => {
     let data = await db.Product.findAll({
-        where: { type: "MANGA" },
+        //where: { type: "MANGA" },
         raw: true
     });
 
