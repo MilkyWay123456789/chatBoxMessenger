@@ -230,62 +230,61 @@ let handleSendListBook = (sender_psid) => {
 }
 
 let sendListBookTemplate = (senderID) => {
-    // let response = {
-    //     "attachment": {
-    //         "type": "template",
-    //         "payload": {
-    //             "template_type": "generic",
-    //             "elements": [
-    //                 {
-    //                     "title": "List Book Milkyway",
-    //                     "subtitle": "We are please to offer you a list book",
-    //                     "image_url": IMAGE_LIST_BOOK,
-    //                     "buttons": [
-    //                         {
-    //                             "type": "postback",
-    //                             "title": "NOVEL",
-    //                             "payload": "NOVEL",
-    //                         },
-    //                         {
-    //                             "type": "postback",
-    //                             "title": "MANGA",
-    //                             "payload": "MANGA",
-    //                         },
-    //                     ],
-    //                 },
-    //                 {
-    //                     "title": "Open Hour",
-    //                     "subtitle": "MON-FRI 8AM-9AM | SAR 9AM-10AM | SUN 10AM-11AM",
-    //                     "image_url": IMAGE_OPEN,
-    //                     "buttons": [
-    //                         {
-    //                             "type": "web_url",
-    //                             "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
-    //                             "title": "ORDER BOOK",
-    //                             "webview_height_ratio": "tall",
-    //                             "messenger_extensions": true,
-    //                         },
-    //                     ],
-    //                 },
-    //                 {
-    //                     "title": "Change book",
-    //                     "subtitle": "We are willing to accept book exchanges",
-    //                     "image_url": IMAGE_CHANGE_BOOK,
-    //                     "buttons": [
-    //                         {
-    //                             "type": "postback",
-    //                             "title": "CHANGE BOOK",
-    //                             "payload": "CHANGE_BOOK",
-    //                         },
-    //                     ],
-    //                 },
-    //             ]
-    //         }
-    //     }
-    // }
-    let response={"text":"hello bookstore"}
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "List Book Milkyway",
+                        "subtitle": "We are please to offer you a list book",
+                        "image_url": IMAGE_LIST_BOOK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "NOVEL",
+                                "payload": "NOVEL",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "MANGA",
+                                "payload": "MANGA",
+                            },
+                        ],
+                    },
+                    {
+                        "title": "Open Hour",
+                        "subtitle": "MON-FRI 8AM-9AM | SAR 9AM-10AM | SUN 10AM-11AM",
+                        "image_url": IMAGE_OPEN,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
+                                "title": "ORDER BOOK",
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,
+                            },
+                        ],
+                    },
+                    {
+                        "title": "Change book",
+                        "subtitle": "We are willing to accept book exchanges",
+                        "image_url": IMAGE_CHANGE_BOOK,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "CHANGE BOOK",
+                                "payload": "CHANGE_BOOK",
+                            },
+                        ],
+                    },
+                ]
+            }
+        }
+    }
     console.log(">>>check response",response.attachment.payload.elements);
-    return response;
+    return response; 
 }
 
 let handleSendNovel = (sender_psid) => {
@@ -301,57 +300,57 @@ let handleSendNovel = (sender_psid) => {
     })
 }
 
-let sendNovelTemplate = async () => {
-    let data = await db.Product.findAll({
-        where: { type: "NOVEL" },
-        raw: true
-    });
+// let sendNovelTemplate = async () => {
+//     let data = await db.Product.findAll({
+//         where: { type: "NOVEL" },
+//         raw: true
+//     });
 
-    let elements = [];
-    if (data && data.length > 0) {
-        data.map(item => {
-            elements.push({
-                "title": item.title,
-                "subtitle": item.subtitle,
-                "image_url": item.image_url,
-                "buttons": [
-                    {
-                        "type": "postback",
-                        "title": "VIEW DETAILS",
-                        "payload": item.payload,
-                    },
-                ],
-            })
-        })
-    }
+//     let elements = [];
+//     if (data && data.length > 0) {
+//         data.map(item => {
+//             elements.push({
+//                 "title": item.title,
+//                 "subtitle": item.subtitle,
+//                 "image_url": item.image_url,
+//                 "buttons": [
+//                     {
+//                         "type": "postback",
+//                         "title": "VIEW DETAILS",
+//                         "payload": item.payload,
+//                     },
+//                 ],
+//             })
+//         })
+//     }
 
-    elements.push({
-        "title": "Go back",
-        "subtitle": "Go back to list book",
-        "image_url": IMAGE_BACK,
-        "buttons": [
-            {
-                "type": "postback",
-                "title": "GO BACK",
-                "payload": "BACK_TO_LIST_BOOK",
-            },
-        ],
-    })
-    let response = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": []
-            }
-        }
-    }
+//     elements.push({
+//         "title": "Go back",
+//         "subtitle": "Go back to list book",
+//         "image_url": IMAGE_BACK,
+//         "buttons": [
+//             {
+//                 "type": "postback",
+//                 "title": "GO BACK",
+//                 "payload": "BACK_TO_LIST_BOOK",
+//             },
+//         ],
+//     })
+//     let response = {
+//         "attachment": {
+//             "type": "template",
+//             "payload": {
+//                 "template_type": "generic",
+//                 "elements": []
+//             }
+//         }
+//     }
 
-    response.attachment.payload.elements = elements;
-    console.log(">>>check response", response.attachment.payload.elements)
+//     response.attachment.payload.elements = elements;
+//     console.log(">>>check response", response.attachment.payload.elements)
 
-    return response;
-}
+//     return response;
+// }
 
 let handleSendManga = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
@@ -366,57 +365,57 @@ let handleSendManga = (sender_psid) => {
     })
 }
 
-let sendMangaTemplate = async () => {
-    let data = await db.Product.findAll({
-        where: { type: "MANGA" },
-        raw: true
-    });
+// let sendMangaTemplate = async () => {
+//     let data = await db.Product.findAll({
+//         where: { type: "MANGA" },
+//         raw: true
+//     });
 
-    let elements = [];
-    if (data && data.length > 0) {
-        data.map(item => {
-            elements.push({
-                "title": item.title,
-                "subtitle": item.subtitle,
-                "image_url": item.image_url,
-                "buttons": [
-                    {
-                        "type": "postback",
-                        "title": "VIEW DETAILS",
-                        "payload": item.payload,
-                    },
-                ],
-            })
-        })
-    }
+//     let elements = [];
+//     if (data && data.length > 0) {
+//         data.map(item => {
+//             elements.push({
+//                 "title": item.title,
+//                 "subtitle": item.subtitle,
+//                 "image_url": item.image_url,
+//                 "buttons": [
+//                     {
+//                         "type": "postback",
+//                         "title": "VIEW DETAILS",
+//                         "payload": item.payload,
+//                     },
+//                 ],
+//             })
+//         })
+//     }
 
-    elements.push({
-        "title": "Go back",
-        "subtitle": "Go back to list book",
-        "image_url": IMAGE_BACK,
-        "buttons": [
-            {
-                "type": "postback",
-                "title": "GO BACK",
-                "payload": "BACK_TO_LIST_BOOK",
-            },
-        ],
-    })
-    let response = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": []
-            }
-        }
-    }
+//     elements.push({
+//         "title": "Go back",
+//         "subtitle": "Go back to list book",
+//         "image_url": IMAGE_BACK,
+//         "buttons": [
+//             {
+//                 "type": "postback",
+//                 "title": "GO BACK",
+//                 "payload": "BACK_TO_LIST_BOOK",
+//             },
+//         ],
+//     })
+//     let response = {
+//         "attachment": {
+//             "type": "template",
+//             "payload": {
+//                 "template_type": "generic",
+//                 "elements": []
+//             }
+//         }
+//     }
 
-    response.attachment.payload.elements = elements;
-    console.log(">>>check response", response.attachment.payload.elements)
+//     response.attachment.payload.elements = elements;
+//     console.log(">>>check response", response.attachment.payload.elements)
 
-    return response;
-}
+//     return response;
+// }
 
 let handleDetailNovel = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
