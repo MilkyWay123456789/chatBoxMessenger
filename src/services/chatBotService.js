@@ -219,8 +219,7 @@ let getStartedQuickReplyTemplate = () => {
 let handleSendListBook = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            //let responseTem = sendListBookTemplate(sender_psid);
-            let responseTem={"text":"Welcome to listbook"}
+            let responseTem = sendListBookTemplate(sender_psid);
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -231,59 +230,60 @@ let handleSendListBook = (sender_psid) => {
 }
 
 let sendListBookTemplate = (senderID) => {
-    let response = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [
-                    {
-                        "title": "List Book Milkyway",
-                        "subtitle": "We are please to offer you a list book",
-                        "image_url": IMAGE_LIST_BOOK,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "NOVEL",
-                                "payload": "NOVEL",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "MANGA",
-                                "payload": "MANGA",
-                            },
-                        ],
-                    },
-                    {
-                        "title": "Open Hour",
-                        "subtitle": "MON-FRI 8AM-9AM | SAR 9AM-10AM | SUN 10AM-11AM",
-                        "image_url": IMAGE_OPEN,
-                        "buttons": [
-                            {
-                                "type": "web_url",
-                                "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
-                                "title": "ORDER BOOK",
-                                "webview_height_ratio": "tall",
-                                "messenger_extensions": true,
-                            },
-                        ],
-                    },
-                    {
-                        "title": "Change book",
-                        "subtitle": "We are willing to accept book exchanges",
-                        "image_url": IMAGE_CHANGE_BOOK,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "CHANGE BOOK",
-                                "payload": "CHANGE_BOOK",
-                            },
-                        ],
-                    },
-                ]
-            }
-        }
-    }
+    // let response = {
+    //     "attachment": {
+    //         "type": "template",
+    //         "payload": {
+    //             "template_type": "generic",
+    //             "elements": [
+    //                 {
+    //                     "title": "List Book Milkyway",
+    //                     "subtitle": "We are please to offer you a list book",
+    //                     "image_url": IMAGE_LIST_BOOK,
+    //                     "buttons": [
+    //                         {
+    //                             "type": "postback",
+    //                             "title": "NOVEL",
+    //                             "payload": "NOVEL",
+    //                         },
+    //                         {
+    //                             "type": "postback",
+    //                             "title": "MANGA",
+    //                             "payload": "MANGA",
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     "title": "Open Hour",
+    //                     "subtitle": "MON-FRI 8AM-9AM | SAR 9AM-10AM | SUN 10AM-11AM",
+    //                     "image_url": IMAGE_OPEN,
+    //                     "buttons": [
+    //                         {
+    //                             "type": "web_url",
+    //                             "url": `${process.env.URL_ORDER_BOOK}/${senderID}`,
+    //                             "title": "ORDER BOOK",
+    //                             "webview_height_ratio": "tall",
+    //                             "messenger_extensions": true,
+    //                         },
+    //                     ],
+    //                 },
+    //                 {
+    //                     "title": "Change book",
+    //                     "subtitle": "We are willing to accept book exchanges",
+    //                     "image_url": IMAGE_CHANGE_BOOK,
+    //                     "buttons": [
+    //                         {
+    //                             "type": "postback",
+    //                             "title": "CHANGE BOOK",
+    //                             "payload": "CHANGE_BOOK",
+    //                         },
+    //                     ],
+    //                 },
+    //             ]
+    //         }
+    //     }
+    // }
+    let response={"text":"hello bookstore"}
     console.log(">>>check response",response.attachment.payload.elements);
     return response;
 }
