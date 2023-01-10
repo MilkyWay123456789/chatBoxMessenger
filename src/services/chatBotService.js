@@ -747,7 +747,5 @@ module.exports = {
     callSendApi: callSendApi,
     getUserName: getUserName,
     handleGuideToUseBot: handleGuideToUseBot,
-    sendNovelTemplate: sendNovelTemplate,
-    sendMangaTemplate: sendMangaTemplate,
     sendListBookTemplate:sendListBookTemplate
 }
