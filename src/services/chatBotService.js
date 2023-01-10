@@ -131,14 +131,14 @@ let handleWithStarted = (sender_psid) => {
         try {
             let username = await getUserName(sender_psid);
             let responseName = { "text": `Xin chào bạn ${username} đến với MilkyWay` }
-            //let responseTem = sendGetStartedTemplate(sender_psid);
-            let responseTem = getStartedQuickReplyTemplate(sender_psid);
+            let responseTem = sendGetStartedTemplate(sender_psid);
+            //let responseTem = getStartedQuickReplyTemplate(sender_psid);
             //send gif
-            let responseImage = getStartedImageTemplate();
+            //let responseImage = getStartedImageTemplate();
             //send text message
             await callSendApi(sender_psid, responseName);
             //send generic message template
-            await callSendApi(sender_psid, responseImage);
+            //await callSendApi(sender_psid, responseImage);
 
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -219,7 +219,7 @@ let getStartedQuickReplyTemplate = () => {
 let handleSendListBook = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let responseTem = getDetailNovelTemplate(sender_psid);
+            let responseTem = sendListBookTemplate(sender_psid);
             //send generic message template
             await callSendApi(sender_psid, responseTem);
             resolve("done")
@@ -300,57 +300,57 @@ let handleSendNovel = (sender_psid) => {
     })
 }
 
-// let sendNovelTemplate = async () => {
-//     let data = await db.Product.findAll({
-//         where: { type: "NOVEL" },
-//         raw: true
-//     });
+let sendNovelTemplate = async () => {
+    let data = await db.Product.findAll({
+        where: { type: "NOVEL" },
+        raw: true
+    });
 
-//     let elements = [];
-//     if (data && data.length > 0) {
-//         data.map(item => {
-//             elements.push({
-//                 "title": item.title,
-//                 "subtitle": item.subtitle,
-//                 "image_url": item.image_url,
-//                 "buttons": [
-//                     {
-//                         "type": "postback",
-//                         "title": "VIEW DETAILS",
-//                         "payload": item.payload,
-//                     },
-//                 ],
-//             })
-//         })
-//     }
+    let elements = [];
+    if (data && data.length > 0) {
+        data.map(item => {
+            elements.push({
+                "title": item.title,
+                "subtitle": item.subtitle,
+                "image_url": item.image_url,
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "VIEW DETAILS",
+                        "payload": item.payload,
+                    },
+                ],
+            })
+        })
+    }
 
-//     elements.push({
-//         "title": "Go back",
-//         "subtitle": "Go back to list book",
-//         "image_url": IMAGE_BACK,
-//         "buttons": [
-//             {
-//                 "type": "postback",
-//                 "title": "GO BACK",
-//                 "payload": "BACK_TO_LIST_BOOK",
-//             },
-//         ],
-//     })
-//     let response = {
-//         "attachment": {
-//             "type": "template",
-//             "payload": {
-//                 "template_type": "generic",
-//                 "elements": []
-//             }
-//         }
-//     }
+    elements.push({
+        "title": "Go back",
+        "subtitle": "Go back to list book",
+        "image_url": IMAGE_BACK,
+        "buttons": [
+            {
+                "type": "postback",
+                "title": "GO BACK",
+                "payload": "BACK_TO_LIST_BOOK",
+            },
+        ],
+    })
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": []
+            }
+        }
+    }
 
-//     response.attachment.payload.elements = elements;
-//     console.log(">>>check response", response.attachment.payload.elements)
+    response.attachment.payload.elements = elements;
+    console.log(">>>check response", response.attachment.payload.elements)
 
-//     return response;
-// }
+    return response;
+}
 
 let handleSendManga = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
@@ -365,57 +365,57 @@ let handleSendManga = (sender_psid) => {
     })
 }
 
-// let sendMangaTemplate = async () => {
-//     let data = await db.Product.findAll({
-//         where: { type: "MANGA" },
-//         raw: true
-//     });
+let sendMangaTemplate = async () => {
+    let data = await db.Product.findAll({
+        where: { type: "MANGA" },
+        raw: true
+    });
 
-//     let elements = [];
-//     if (data && data.length > 0) {
-//         data.map(item => {
-//             elements.push({
-//                 "title": item.title,
-//                 "subtitle": item.subtitle,
-//                 "image_url": item.image_url,
-//                 "buttons": [
-//                     {
-//                         "type": "postback",
-//                         "title": "VIEW DETAILS",
-//                         "payload": item.payload,
-//                     },
-//                 ],
-//             })
-//         })
-//     }
+    let elements = [];
+    if (data && data.length > 0) {
+        data.map(item => {
+            elements.push({
+                "title": item.title,
+                "subtitle": item.subtitle,
+                "image_url": item.image_url,
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "VIEW DETAILS",
+                        "payload": item.payload,
+                    },
+                ],
+            })
+        })
+    }
 
-//     elements.push({
-//         "title": "Go back",
-//         "subtitle": "Go back to list book",
-//         "image_url": IMAGE_BACK,
-//         "buttons": [
-//             {
-//                 "type": "postback",
-//                 "title": "GO BACK",
-//                 "payload": "BACK_TO_LIST_BOOK",
-//             },
-//         ],
-//     })
-//     let response = {
-//         "attachment": {
-//             "type": "template",
-//             "payload": {
-//                 "template_type": "generic",
-//                 "elements": []
-//             }
-//         }
-//     }
+    elements.push({
+        "title": "Go back",
+        "subtitle": "Go back to list book",
+        "image_url": IMAGE_BACK,
+        "buttons": [
+            {
+                "type": "postback",
+                "title": "GO BACK",
+                "payload": "BACK_TO_LIST_BOOK",
+            },
+        ],
+    })
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": []
+            }
+        }
+    }
 
-//     response.attachment.payload.elements = elements;
-//     console.log(">>>check response", response.attachment.payload.elements)
+    response.attachment.payload.elements = elements;
+    console.log(">>>check response", response.attachment.payload.elements)
 
-//     return response;
-// }
+    return response;
+}
 
 let handleDetailNovel = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
